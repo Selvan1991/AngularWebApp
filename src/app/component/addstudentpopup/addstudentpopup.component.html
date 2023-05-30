@@ -1,0 +1,38 @@
+<form [formGroup]="studentform" (ngSubmit)="Savestudent()">
+    <h1 mat-dialog-title>{{inputdata.title}}</h1>
+    <div mat-dialog-content>
+        <mat-form-field appearance="outline">
+            <mat-label>Student Name</mat-label>
+            <input formControlName="studentname" matInput required="true">
+            <input type="hidden" formControlName="studentid">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Course</mat-label>
+            <input matInput formControlName="course" required="true">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Specialization</mat-label>
+            <input matInput formControlName="specialization" required="true">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Percentage</mat-label>
+            <input matInput formControlName="percentage" required="true">
+        </mat-form-field>
+       
+        <section>
+            <mat-form-field appearance="outline">
+                <mat-label>Select Department</mat-label>
+                <mat-select formControlName="departmentid" required="true">
+                    <mat-option *ngFor="let depart of departmentlist" [value]="depart.departmentID">
+                        {{ depart.departmentName }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </section>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button type="submit" color="primary">Save</button>
+        <a (click)="closepopup()" mat-raised-button color="warn">Close</a>
+        <!-- <button mat-raised-button [mat-dialog-close]="closemessage" color="accent">Cancel</button> -->
+    </div>
+</form>

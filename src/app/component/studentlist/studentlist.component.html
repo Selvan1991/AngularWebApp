@@ -1,0 +1,63 @@
+<mat-card>
+    <mat-card-header>
+        <mat-form-field appearance="outline">
+            <mat-label>Enter the Text</mat-label>
+            <input matInput (keyup)="Filterchange($event)" />
+        </mat-form-field>
+        <button style="margin-left: 60%;" (click)="addstudentdetails()" mat-raised-button color="primary">Add Student
+            (+)</button>
+
+    </mat-card-header>
+    <mat-card-content>
+
+        <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="studentname">
+                <th mat-sort-header mat-header-cell *matHeaderCellDef> StudentName</th>
+                <td mat-cell *matCellDef="let element">{{element.studentName}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="course">
+                <th mat-sort-header mat-header-cell *matHeaderCellDef> Course</th>
+                <td mat-cell *matCellDef="let element">{{element.course}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="specialization">
+                <th mat-sort-header mat-header-cell *matHeaderCellDef> Specialization</th>
+                <td mat-cell *matCellDef="let element">{{element.specialization}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="percentage">
+                <th mat-sort-header mat-header-cell *matHeaderCellDef> Percentage</th>
+                <td mat-cell *matCellDef="let element">{{element.percentage}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="department">
+                <th mat-sort-header mat-header-cell *matHeaderCellDef> Department</th>
+                <td mat-cell *matCellDef="let element">{{element.departmentName}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action</th>
+                <td mat-cell *matCellDef="let element">
+
+                    <button type="button" (click)="editstudentdetails(element.studentID)" mat-raised-button color="primary">Edit</button>
+                    <button type="button" (click)="deletestudentdetail(element.studentID)" mat-raised-button color="warn">Delete</button>
+                    <button type="button" (click)="detailstudentdetails(element.studentID)" mat-raised-button color="primary">Detail</button>
+                </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
+
+        </table>
+
+    </mat-card-content>
+    <br>
+    <mat-card-footer>
+
+        <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+
+    </mat-card-footer>
+</mat-card>

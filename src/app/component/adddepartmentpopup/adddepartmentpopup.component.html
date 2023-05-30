@@ -1,0 +1,18 @@
+<form [formGroup]="departmentform" (ngSubmit)="Savedepartment()">
+    <h1 mat-dialog-title>{{inputdata.title}}</h1>
+    <div mat-dialog-content style="margin-top: 19px;">
+        <mat-form-field appearance="outline">
+            <mat-label>Department Name</mat-label>
+            <input formControlName="departmentname" matInput required="true">
+            <input type="hidden" formControlName="departmentid">
+            <!-- <small [class.d-none]="departmentform.get('departmentname')?.valid ||
+            departmentform.get('departmentname')?.untouched"
+      class="text-danger">Department Name is required</small> -->
+        </mat-form-field>
+
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button type="submit" color="primary">Save</button>
+        <a (click)="closepopup()" mat-raised-button color="warn">Close</a>
+    </div>
+</form>
