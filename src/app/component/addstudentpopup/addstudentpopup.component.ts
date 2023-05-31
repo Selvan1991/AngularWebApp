@@ -55,13 +55,12 @@ export class AddstudentpopupComponent implements OnInit {
 
   async Savestudent() {
     this.studentform.value;
-    debugger
     if (this.studentform.value.studentid === '') {
       this.studentform.value.studentid = '0';
     }
 
     this.service.savestudentdetails(this.studentform.value).subscribe(res => {
-      if (this.studentform.value.studentid === '') {
+      if (this.inputdata.btntext !== 'Update') {
         alert('Student Records has been Added Successfully');
       }
       else{
