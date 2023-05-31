@@ -25,14 +25,15 @@ export class DepartmentlistComponent {
   @ViewChild(MatSort) sort !: MatSort;
 
 
-  Openpopup(code: any, title: any, component: any) {
+  Openpopup(code: any, title: any, btntext:any, component: any) {
     var _popup = this.dialog.open(component, {
       width: '40%',
       enterAnimationDuration: '1000ms',
       exitAnimationDuration: '1000ms',
       data: {
         title: title,
-        code: code
+        code: code,
+        btntext : btntext
       }
     });
     _popup.afterClosed().subscribe(item => {
@@ -45,7 +46,7 @@ export class DepartmentlistComponent {
     this.loaddepartmentlist();
   }
   async adddepartment() {
-    this.Openpopup(0, 'Add Department', AdddepartmentpopupComponent);
+    this.Openpopup(0, 'Add Department', 'Save',AdddepartmentpopupComponent);
   }
   Filterchange(data: Event) {
     const value = (data.target as HTMLInputElement).value;
@@ -62,18 +63,21 @@ export class DepartmentlistComponent {
     })
   }
   async editdepartment(departmentid: any) {
-    this.Openpopup(departmentid, 'Edit Department', AdddepartmentpopupComponent);
+    this.Openpopup(departmentid, 'Edit Department', 'Update', AdddepartmentpopupComponent);
 
   }
-  async deletedepartment(departmentid: any) {
+  async deletedepartment(departmentid: any,departmentName : any) {
+    if(confirm("Are you sure to delete "+ departmentName)) {
     this.service.DeleteDepartmentById(departmentid).subscribe(resp => {
       if (resp != '' && resp === 'Deleted Successfully')
+      alert( departmentName +' has been Deleted Successfully');
         this.loaddepartmentlist();
     })
+  }
 
   }
   async detaildepartment(departmentid: any) {
-    this.Openpopup(departmentid, 'Edit Department', AdddepartmentpopupComponent);
+    this.Openpopup(departmentid, 'Edit Department', 'Detail', AdddepartmentpopupComponent);
 
   }
 }
