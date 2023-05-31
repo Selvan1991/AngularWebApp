@@ -23,7 +23,7 @@
                 <td mat-cell *matCellDef="let element">
 
                     <button type="button" (click)="editdepartment(element.departmentID)" mat-raised-button color="primary">Edit</button>
-                    <button type="button" (click)="deletedepartment(element.departmentID)" mat-raised-button color="warn">Delete</button>
+                    <button type="button" (click)="deletedepartment(element.departmentID,element.departmentName)" mat-raised-button color="warn">Delete</button>
                     <button type="button" (click)="detaildepartment(element.departmentID)" mat-raised-button color="primary">Detail</button>
                 </td>
             </ng-container>
