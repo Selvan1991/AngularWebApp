@@ -26,14 +26,15 @@ export class StudentlistComponent {
   @ViewChild(MatSort) sort !: MatSort;
 
 
-  Openpopup(code: any, title: any, component: any) {
+  Openpopup(code: any, title: any,btntext : any, component: any) {
     var _popup = this.dialog.open(component, {
       width: '40%',
       enterAnimationDuration: '1000ms',
       exitAnimationDuration: '1000ms',
       data: {
         title: title,
-        code: code
+        code: code,
+        btntext : btntext
       }
     });
     _popup.afterClosed().subscribe(item => {
@@ -47,26 +48,31 @@ export class StudentlistComponent {
     this.loadstudentdetail();
   }
   async addstudentdetails() {
-    this.Openpopup(0, 'Add Student', AddstudentpopupComponent);
+    this.Openpopup(0, 'Add Student', 'Save',AddstudentpopupComponent);
   }
   async editstudentdetails(code: any) {
-    this.Openpopup(code, 'Edit Student', AddstudentpopupComponent);
+    this.Openpopup(code, 'Edit Student','Update', AddstudentpopupComponent);
   }
 
   async detailstudentdetails(code: any) {
 
-    this.Openpopup(code, 'Student Detail', AddstudentpopupComponent);
+    this.Openpopup(code, 'Student Detail', 'Detail',AddstudentpopupComponent);
   }
   Filterchange(data: Event) {
     const value = (data.target as HTMLInputElement).value;
     this.dataSource.filter = value;
   }
-  async deletestudentdetail(studentid: any) {
+  async deletestudentdetail(studentid: any, studentName : any) {
+    if(confirm("Are you sure to delete "+ studentName)) {
     this.service.DeleteStudentDetailById(studentid).subscribe(resp => {
 
-      if (resp != '' && resp === 'Deleted Successfully')
+      if (resp != '' && resp === 'Deleted Successfully'){
+        alert( studentName +' has been Deleted Successfully');
         this.loadstudentdetail();
+      }
+       
     })
+  }
   }
   async loadstudentdetail() {
 
